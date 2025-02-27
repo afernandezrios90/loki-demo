@@ -22,7 +22,7 @@ services:
     ports: 
       - 5005:5000
     volumes:
-      - ./logs:/app/logs/
+      - "${PWD}/logs:/app/logs/"
     networks:
       - grafana-network
 
@@ -33,7 +33,7 @@ services:
       - 12345:12345
     volumes:
       - "${PWD}/alloy-config.alloy:/etc/alloy/config.alloy"
-      - "${PWD}./logs:/tmp/app-logs/"
+      - "${PWD}/logs:/tmp/app-logs/"
     command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     depends_on:
       - carnivorous-garden
