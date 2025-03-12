@@ -14,18 +14,6 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     restart: unless-stopped
 
-  carnivorous-garden:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: carnivorous-garden
-    ports: 
-      - 5005:5000
-    volumes:
-      - "${PWD}/logs:/app/logs/"
-    networks:
-      - grafana-network
-
   alloy:
     image: grafana/alloy:v1.6.0
     container_name: alloy
@@ -36,7 +24,6 @@ services:
       - "${PWD}/logs:/tmp/app-logs/"
     command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     depends_on:
-      - carnivorous-garden
       - loki
     networks:
       - grafana-network
