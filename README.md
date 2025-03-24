@@ -4,6 +4,10 @@ Repository for deploying a simple Loki installation along with an application to
 
 ## Description
 
+> [!TIP]  
+> You are in the `main` branch. Other active branches with slightly different funcionality are:
+> - `virtual-store` --> Loki + Alloy deployment that gather logs from the Virtual Store App (Please check: https://github.com/afernandezrios90/virtual-store).
+
 This project is just a simple simulation of a Loki installations to test basic functionality. It is based on 'what-is-loki' branch of [loki-fundamentals](https://github.com/grafana/loki-fundamentals) official repository.
 
 ## High-level diagram
@@ -17,13 +21,14 @@ This project is just a simple simulation of a Loki installations to test basic f
 ```bash
 git clone https://github.com/afernandezrios90/loki-demo.git
 ```
-2. Adjust the configuration if desired to change log path, processing features, etc, if desired
-3. Run using Docker compose
+2. Switch to the desired branch
+3. Adjust the configuration if desired to change log path, processing features, etc, if desired
+4. Run using Docker compose
 ```bash
 docker-compose up -d
 ```
-4. Open the "Carnivorous Garden" app in your browser (`http://localhost:5005`) and interact to start generating interesting log content.
-5. Add Loki installation as datasource in Grafana and start reviewing logs.
+5. Open the "Carnivorous Garden" app in your browser (`http://localhost:5005`) and interact to start generating interesting log content.
+6. Add Loki installation as datasource in Grafana and start reviewing logs.
 
 ## Troubleshooing
 ### Test logs ingestion
