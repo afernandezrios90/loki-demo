@@ -21,7 +21,7 @@ services:
       - 12345:12345
     volumes:
       - "${PWD}/alloy-config.alloy:/etc/alloy/config.alloy"
-      - "${PWD}/logs:/tmp/app-logs/"
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"  # To read Docker logs
     command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     depends_on:
       - loki
@@ -30,4 +30,4 @@ services:
 
 networks:
   grafana-network:
-    external: true # Red ya creada en mi despliegue de Grafana
+    external: true # Already existing network in my docker ecosystem

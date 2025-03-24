@@ -1,4 +1,4 @@
-# Habilita o deshabilita la autenticación en Loki (para este caso, se deja deshabilitada)
+# Enable or disable authentication in Loki (for this case, it is left disabled)
 auth_enabled: false
 
 limits_config:
@@ -9,34 +9,34 @@ pattern_ingester:
   enabled: true
 
 server:
-  # Puerto donde Loki escuchará las peticiones HTTP
+  # Port where Loki will listen for HTTP requests
   http_listen_port: 3100
 
 ingester:
   lifecycler:
     ring:
       kvstore:
-        # Define el almacenamiento del anillo de ingesta. Aquí se usa memoria en lugar de un almacén distribuido.
+        # Defines the storage of the ingestion ring. Here, memory is used instead of a distributed store.
         store: inmemory
-      replication_factor: 1  # Número de réplicas de los datos en ingesta (1 porque es un entorno simple)
-    final_sleep: 0s  # No espera antes de cerrar los ingesters
+      replication_factor: 1  # Number of replicas of the ingested data (1 because it is a simple environment)
+    final_sleep: 0s  # No wait before shutting down the ingesters
 
 schema_config:
   configs:
-    - from: 2025-02-25  # Fecha de inicio para esta configuración del esquema
-      store: tsdb  # Motor de almacenamiento para los logs
-      object_store: filesystem  # Usa el sistema de archivos local para almacenar los logs
-      schema: v13  # Versión del esquema que se usará
+    - from: 2025-02-25  # Start date for this schema configuration
+      store: tsdb  # Storage engine for the logs
+      object_store: filesystem  # Uses the local filesystem to store the logs
+      schema: v13  # Schema version to be used
       index:
-        prefix: index_  # Prefijo para los índices generados
-        period: 24h  # Los índices se rotarán cada 24 horas
+        prefix: index_  # Prefix for the generated indexes
+        period: 24h  # Indexes will rotate every 24 hours
 
 storage_config:
   tsdb_shipper:
-    active_index_directory: /tmp/loki/index  # Directorio donde se almacenarán los índices activos
-    cache_location: /tmp/loki/index_cache  # Caché de índices
+    active_index_directory: /tmp/loki/index  # Directory where active indexes will be stored
+    cache_location: /tmp/loki/index_cache  # Index cache
   filesystem:
-    directory: /tmp/loki/chunks  # Ubicación donde se almacenarán los chunks de logs en disco
+    directory: /tmp/loki/chunks  # Location where log chunks will be stored on disk
 
 common:
   path_prefix: /tmp/loki
@@ -45,4 +45,3 @@ common:
     kvstore:
       store: inmemory
     replication_factor: 1
-
